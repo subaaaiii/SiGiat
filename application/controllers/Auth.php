@@ -118,7 +118,7 @@ class Auth extends CI_Controller
         } //jika sedang login tidak bisa masuk ke registration, harus logout dulu
         $this->form_validation->set_rules('name', 'Name Organization', 'required|trim');
         $this->form_validation->set_rules('lingkup', 'Lingkup', 'required');
-        $this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[organization.email]',
+        $this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[user.email]',
             ['is_unique' => 'This email has already registered!']
         );
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]',
@@ -151,7 +151,7 @@ class Auth extends CI_Controller
 
             $this->db->insert('user', $data); //insert(tabel yang mana, data nya apa)
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Congratulation! your Organization account has been created. Please Login</div>');
+            Congratulation! your Organization account has been created. Wait Activation from Admin </div>');
             redirect('auth');
         }
     }

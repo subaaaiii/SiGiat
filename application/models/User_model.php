@@ -7,4 +7,8 @@ class User_model extends CI_Model
     {
         $this->db->delete('user', array('id' => $id));
     }
+    public function roleDelete($id)
+    {
+        $this->db->delete('user_role', array('id' => $id));
+    }
 }

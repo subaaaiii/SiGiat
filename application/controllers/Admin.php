@@ -11,7 +11,10 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
-        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sum_admin_org'] =  $this->db->get_where('user', ['role_id' => 3, 'is_Active' =>1])->num_rows();
+        $data['sum_member'] =  $this->db->get_where('user', ['role_id' => 2, 'is_Active' =>1])->num_rows();
+        $data['pending_request'] =  $this->db->get_where('user', ['is_active' => 0])->num_rows();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -27,11 +30,22 @@ class Admin extends CI_Controller
 
         $data['role'] = $this->db->get('user_role')->result_array();
 
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        if ($this->form_validation->run() == false){
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/role', $data);
         $this->load->view('templates/footer');
+        }else{
+            $this->db->insert('user_role', ['role' => $this->input->post('role')]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                    New Role Added</div>');
+            redirect('admin/role');
+        }
+
+        
     }
 
     public function roleAccess($role_id)
@@ -73,7 +87,7 @@ class Admin extends CI_Controller
     }
     public function request()
     {
-        $data['title'] = 'Request Aktivasi Organisasi';
+        $data['title'] = 'Request Aktivasi';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['request'] = $this->db->get_Where('user', ['is_active' => 0])->result_array();
 
@@ -84,24 +98,52 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function UserActivation($data)
+    public function userActivation($data)
     {
         $data_accept = array(
             'is_active' => 1
         );
 
-        $this->db->where('id', $data['id']);
+        $this->db->where('id', $data);
         $this->db->update('user', $data_accept);
+        
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Organisasi Telah Diaktifkan </div>');
-        redirect('admin');
+        redirect('admin/request');
     }
+
     public function deleteUser($id)
     {
         $this->load->model('User_model', 'user');
         $this->user->userDelete($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             Organisasi Telah Dihapus </div>');
-        redirect('admin');
+        redirect('admin/request');
     }
+    public function deleteRole($id)
+    {
+        $this->load->model('role_model', 'role');
+        $this->role->roleDelete($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Role Telah Dihapus </div>');
+        redirect('admin/role');
+    }
+    public function updateRole($id=null){
+        $this->load->model('role_model', 'role');
+        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if($this->input->post()){
+            $data_update = $this->input->post();
+            $this->role->update_role($data_update);
+            redirect('admin/role');
+        }else{
+            $data['title'] = 'Edit Data role';
+            $data['role'] = $this->role->get_id_role($id);          
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/formEditrole',$data);          
+            $this->load->view('templates/footer');          
+        }
+    }
+
 }
