@@ -18,7 +18,7 @@
                     <th scope="col">Organisasi</th>
                     <th scope="col">Lingkup</th>
                     <th scope="col">Tanggal Request</th>
-                    <th scope="col">Aksi</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
