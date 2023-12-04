@@ -1,0 +1,6 @@
+.limited-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Sesuaikan dengan lebar yang diinginkan */
+}
