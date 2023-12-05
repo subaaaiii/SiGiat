@@ -70,7 +70,7 @@
                  <p class="card-text">Registrasi : 12 hari lagi</p>
                  <h5 class="card-title limited-text"><b><?=$k->judul ?></b></h5>
                  <p class="card-text limited-text"><?=$k->deskripsi ?></p>
-                 <a href="#">Lihat Selengkapnya...</a>
+                 <a href="<?= base_url('Sigiat/viewMore/' . $k->id) ?>">Lihat Selengkapnya...</a>
                </div>
              </div>
            </div>
