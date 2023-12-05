@@ -13,7 +13,6 @@ class Sigiat extends CI_Controller
     {
         $data['title'] = 'Sigiat';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
 
         $this->load->view('sigiat/header', $data);
@@ -21,5 +20,29 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/index', $data);
         $this->load->view('sigiat/footer', $data);
         
+    }
+
+    public function viewMore($id)
+    {
+        $data['title'] = 'Detail Kegiatan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kegiatan'] = $this->Kegiatan_model->get_id_kegiatan($id);
+
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/detail_kegiatan', $data);
+        $this->load->view('sigiat/footer');
+    }
+
+    public function viewMore2($id)
+    {
+        $data['title'] = 'Detail Kegiatan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kegiatan'] = $this->Kegiatan_model->get_id_kegiatan($id);
+
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/detail_kegiatan2', $data);
+        $this->load->view('sigiat/footer');
     }
 }
