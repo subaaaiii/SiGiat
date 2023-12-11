@@ -65,5 +65,39 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/footer', $data);
         
     }
+    // public function insertToFavorite($id,$id_user)
+    // {
+    //     $this->Kegiatan_model->insertFavorite($id,$id_user);
+    //     redirect($this->agent->referrer());
+    // }
+    public function removeFromFavorite($id)
+    {
+        $this->Kegiatan_model->removeFavorite($id);
+        redirect($this->agent->referrer());
+    }
+    public function viewFavorite()
+    {
+        $data['title'] = 'Favorite';
+        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $user_id = $data['user']['id'];
+        $data['favorite'] = $this->Kegiatan_model->getFavorite($user_id);
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/favorite', $data);
+        $this->load->view('sigiat/footer', $data);
+        
+    }
+    public function toggleFavorite()
+{
+    $kegiatanId = $this->input->post('kegiatanId');
+    $userId = $this->input->post('userId');
+
+    // Load the model and toggle the favorite status
+    $this->load->model('Kegiatan_model');
+    $status = $this->Kegiatan_model->toggleFavorite($kegiatanId, $userId);
+
+    echo $status; // 'add' if added to favorites, 'remove' if removed
+}
+
 
 }

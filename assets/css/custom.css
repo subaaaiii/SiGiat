@@ -14,3 +14,9 @@
 .custom-card:hover .description {
     color: #4e73df;; 
   }
+
+  /* Add your custom styles here */
+  .favorited {
+    background-color: yellow;
+    /* You can customize the styles for the favorited state */
+}

@@ -11,10 +11,10 @@
                  Cari Pengalaman
                </h2>
                <p>Cari dan Temukan Kegiatan Favoritmu</p>
-               <a href="<?=base_url('sigiat/kegiatan')?>"><button class="btn btn-lg btn-primary">
-                 Temukan Kegiatan
-               </button></a>
-               
+               <a href="<?= base_url('sigiat/kegiatan') ?>"><button class="btn btn-lg btn-primary">
+                   Temukan Kegiatan
+                 </button></a>
+
              </div>
            </div>
          </div>
@@ -83,6 +83,46 @@
              </div>
              <div class="col-md-8">
                <div class="card-body">
+                 <div class="float-right">
+                   <?php if ($this->session->userdata('email')) : ?>
+                    <?php
+                    // Load the model at the beginning of your view file
+                    $this->load->model('Kegiatan_model');
+
+                    // Now you can use the model's methods in the view
+                    $isFavorite = $this->Kegiatan_model->isFavorite($k->id,$user['id']);
+                    $buttonColor = $isFavorite ? 'btn-warning' : 'btn-border';
+                    ?>
+                       <button class="btn border toggle-favorite <?= $buttonColor ?>" style="text-decoration: none" data-kegiatan-id="<?= $k->id ?>" data-user-id="<?= $user['id'] ?>">
+                         <i class="fas fa-star"></i> Favorite
+                       </button>
+                   <?php else : ?>
+                     <button class="btn border" style="text-decoration: none" onclick="showLoginModal()">
+                       <i class="fas fa-star"></i> Favorite
+                     </button>
+                   <?php endif; ?>
+                 </div>
+
+                 <!-- Add this modal HTML somewhere in your page -->
+                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                       </div>
+                       <div class="modal-body">
+                         <p>Silahkan untuk menambahkan ke favorite.</p>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
                  <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
                  <?php
 
