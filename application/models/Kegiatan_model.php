@@ -17,7 +17,8 @@ class Kegiatan_model extends CI_Model
             'tanggal_kegiatan' => $data['tanggal_kegiatan'],
             'tanggal_daftar' => $data['tanggal_daftar'], 
             'tanggal_berakhir' => $data['tanggal_berakhir'],
-            'foto' => $data_foto
+            'foto' => $data_foto,
+            'link_pendaftaran' => $data['link_pendaftaran'],
         );
         $this->db->insert('kegiatan', $data_insert);
         return $this->db->affected_rows();
@@ -38,10 +39,10 @@ class Kegiatan_model extends CI_Model
             'tanggal_kegiatan' => $data['tanggal_kegiatan'],
             'tanggal_daftar' => $data['tanggal_daftar'], 
             'tanggal_berakhir' => $data['tanggal_berakhir'],
+            'link_pendaftaran' => $data['link_pendaftaran'],
         );
 
         $this->db->where('id', $data['id']);
         $this->db->update('kegiatan', $data_update);
-
     }
 }
