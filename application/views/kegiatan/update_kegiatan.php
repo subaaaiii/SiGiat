@@ -60,6 +60,10 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="link_pendaftaran"><b>Link Pendaftaran</b></label>
+                <textarea class="form-control" id="link_pendaftaran" name="link_pendaftaran" placeholder="Masukkan Link Pendaftaran" value="<?= $k->link_pendaftaran ?>"></textarea>
+            </div>
             <button type="submit" class="btn btn-primary justify-content-center">Posting Kegiatan</button>
             </form>
         </div>

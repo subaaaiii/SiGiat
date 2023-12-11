@@ -27,8 +27,8 @@
                             <th scope="col">Tanggal Penutupan Pendaftaran</th>
                             <th scope="col">Tanggal Acara Inti</th>
                             <th scope="col">Foto</th>
+                            <th scope="col">Link</th>
                             <th scope="col">Aksi</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +40,7 @@
                                 <td><?= $k->tanggal_berakhir ?></td>
                                 <td><?= $k->tanggal_kegiatan ?></td>
                                 <td><?= $k->foto ?></td>
+                                <td><?= $k->link_pendaftaran ?></td>
                                 <td>
                                 <a href="<?= base_url('kegiatan/updateKegiatan/' . $k->id) ?>" class="badge badge-warning">edit</a>
                                 <a href="<?= base_url('kegiatan/deleteKegiatan/' . $k->id) ?>" class="badge badge-danger">delete</a>
