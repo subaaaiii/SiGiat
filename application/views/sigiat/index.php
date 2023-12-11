@@ -11,9 +11,10 @@
                  Cari Pengalaman
                </h2>
                <p>Cari dan Temukan Kegiatan Favoritmu</p>
-               <router-link class="btn btn-lg btn-primary" to="/FoodView">
-                 <b-icon-arrow-right></b-icon-arrow-right> Cari Kegiatan
-               </router-link>
+               <a href="<?=base_url('sigiat/kegiatan')?>"><button class="btn btn-lg btn-primary">
+                 Temukan Kegiatan
+               </button></a>
+               
              </div>
            </div>
          </div>

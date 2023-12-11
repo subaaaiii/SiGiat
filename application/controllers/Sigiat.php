@@ -20,6 +20,17 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/footer', $data);
         
     }
+    public function kegiatan()
+    {
+        $data['title'] = 'Sigiat';
+        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/kegiatan', $data);
+        $this->load->view('sigiat/footer', $data);
+        
+    }
     public function viewMore($id)
     {
         $data['title'] = 'Detail Kegiatan';

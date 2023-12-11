@@ -19,6 +19,9 @@
   <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
   <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?= base_url('assets/'); ?>vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?= base_url('assets/'); ?>vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 
 </head>
 

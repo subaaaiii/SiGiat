@@ -4,3 +4,13 @@
     text-overflow: ellipsis;
     max-width: 100%; /* Sesuaikan dengan lebar yang diinginkan */
 }
+.custom-card{
+    border: 1px solid #858796;
+}
+.custom-card:hover {
+    border: 2px solid #4e73df; ;
+}
+
+.custom-card:hover .description {
+    color: #4e73df;; 
+  }

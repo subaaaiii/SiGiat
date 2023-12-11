@@ -47,12 +47,13 @@ class Auth extends CI_Controller
                         'id' => $user['id']
                     ];
                     $this->session->set_userdata($data);
-                    if ($user['role_id'] == 1) {
+                    // if ($user['role_id'] == 1) {
 
-                        redirect('admin');
-                    } else {
-                        redirect('user');
-                    }
+                    //     redirect('admin');
+                    // } else {
+                    //     redirect('user');
+                    // }
+                    redirect('sigiat');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                     Wrong password!</div>');
@@ -165,7 +166,7 @@ class Auth extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             You have been logged out!</div>');
-        redirect('auth');
+        redirect('sigiat');
     }
 
     public function blocked(){
