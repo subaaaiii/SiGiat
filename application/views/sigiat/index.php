@@ -62,14 +62,14 @@
          <div class="card shadow">
            <div class="row">
              <div class="col-md-4">
-               <img class="card-img-left img-fluid " src="<?= base_url() ?>assets/img/foto_kegiatan/<?=$k->foto ?>" width="100%">
+               <img class="card-img-left img-fluid " src="<?= base_url() ?>assets/img/foto_kegiatan/<?= $k->foto ?>" width="100%">
              </div>
              <div class="col-md-8">
                <div class="card-body">
-                 <p class="card-text limited-text" style="color: #2e59d9;"><b><?=$k->penyelenggara ?></b></p>
+                 <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->penyelenggara ?></b></p>
                  <p class="card-text">Registrasi : 12 hari lagi</p>
-                 <h5 class="card-title limited-text"><b><?=$k->judul ?></b></h5>
-                 <p class="card-text limited-text"><?=$k->deskripsi ?></p>
+                 <h5 class="card-title limited-text"><b><?= $k->judul ?></b></h5>
+                 <p class="card-text limited-text"><?= $k->deskripsi ?></p>
                  <a href="<?= base_url('Sigiat/viewMore/' . $k->id) ?>">Lihat Selengkapnya...</a>
                </div>
              </div>

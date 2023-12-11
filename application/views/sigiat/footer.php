@@ -1,10 +1,76 @@
 <!-- Footer -->
+<style>
+    .text-reset {
+        text-decoration: none;
+    }
+</style>
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; SiGiat <?= date('Y'); ?> </span>
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas me-3"></i>Sigiat
+                    </h6>
+                    <p>
+                        SiGiat adalah jawaban untuk menciptakan lingkungan akademik yang lebih hidup dan terkoneksi.
+                    </p>
+                </div>
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Useful links
+                    </h6>
+                    <p>
+                        <a href="<?php echo base_url('Sigiat'); ?>" class="text-reset">Beranda</a>
+                    </p>
+                    <p>
+                        <a href="<?php echo base_url('Sigiat/tentangKami'); ?>" class="text-reset">Tentang Kami</a>
+                    </p>
+                    <p>
+                        <a href="<?php echo base_url('Auth'); ?>" class="text-reset">Login</a>
+                    </p>
+                    <p>
+                        <a href="<?php echo base_url('Auth/registration'); ?>" class="text-reset">Registrasi</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i>Jl. Rungkut Madya No.1, 60294, Surabaya</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        humas@upnjatim.ac.id
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> +62 6231 8706 369</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
         </div>
-    </div>
+    </section>
+    <!-- Section: Links  -->
+    <section>
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; SiGiat <?= date('Y'); ?> </span>
+            </div>
+        </div>
+    </section>
 </footer>
 <!-- End of Footer -->
 
@@ -20,8 +86,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,7 +111,7 @@
 
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             preview.src = reader.result;
         };
 
@@ -75,26 +140,26 @@
 <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
 
 <script>
-    $('.custom-file-input').on('change',function(){
+    $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
 
 
 
-    $('.form-check-input').on('click', function(){
+    $('.form-check-input').on('click', function() {
         const menuId = $(this).data('menu');
         const roleId = $(this).data('role');
 
         $.ajax({
             url: "<?= base_url('admin/changeaccess'); ?>",
             type: 'post',
-            data :{
+            data: {
                 menuId: menuId,
                 roleId: roleId
             },
-            success: function(){
-                document.location.href="<?=base_url('admin/roleAccess/'); ?>" + roleId;
+            success: function() {
+                document.location.href = "<?= base_url('admin/roleAccess/'); ?>" + roleId;
             }
 
         });

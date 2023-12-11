@@ -17,7 +17,10 @@
                     <p class="card-text"><strong>Tanggal Berakhir:</strong> <?= date('d-m-Y', strtotime($kegiatan->tanggal_berakhir)) ?></p>
                     <p class="card-text"><strong>Tanggal Kegiatan:</strong> <?= date('d-m-Y', strtotime($kegiatan->tanggal_kegiatan)) ?></p>
                     <!-- Tampilkan informasi lainnya sesuai kebutuhan -->
-                    <a href="<?= base_url('sigiat') ?>" class="btn btn-secondary">Kembali</a>
+                    <br>
+                    <a href="<?= base_url('sigiat') ?>" class="btn btn-secondary" style="width: 20%;">Kembali</a>
+                    &nbsp;
+                    <a href="<?php echo $kegiatan->link_pendaftaran; ?>" class="btn btn-secondary" style="width: 20%;">Daftar</a>
                 </div>
                 <!-- Letakkan link "Lihat Deskripsi" di sini -->
             </div>
