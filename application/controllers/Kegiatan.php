@@ -13,7 +13,6 @@ class Kegiatan extends CI_Controller
     {
         $data['title'] = 'Management Kegiatan';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
 
         $this->load->view('templates/header', $data);
@@ -31,11 +30,9 @@ class Kegiatan extends CI_Controller
                 $config['allowed_types'] = 'gif|jpg|png';
                 $config['max_size']     = '2048';
                 $config['upload_path'] = './assets/img/foto_kegiatan/';
-
                 $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('foto')) {
-
                     $new_image = $this->upload->data('file_name');
                     $data_foto = $new_image;
                 }
@@ -43,12 +40,12 @@ class Kegiatan extends CI_Controller
             $result = $this->Kegiatan_model->insertKegiatan($data_insert, $data_foto);
             if ($result > 0) {
                 $this->session->set_flashdata('message', '<div class="col-6 alert alert-success" role="alert">
-                 Success!
-              </div>');
+                Success!
+                </div>');
             } else {
                 $this->session->set_flashdata('message', '<div class="col-6 alert alert-danger" role="alert">
                 Error
-              </div>');
+                </div>');
             }
             redirect('kegiatan');
         } else {
@@ -72,20 +69,16 @@ class Kegiatan extends CI_Controller
             $tanggal_daftar = $this->input->post('tanggal_daftar');
             $tanggal_berakhir = $this->input->post('tanggal_berakhir');
             $id = $this->input->post('id');
-            
-            
-            
             $upload_image = $_FILES['foto']['name'];
+            $link_pendaftaran = $this->input->post('link_pendaftaran');
 
             if ($upload_image) {
                 $config['allowed_types'] = 'gif|jpg|png';
                 $config['max_size']     = '2048';
                 $config['upload_path'] = './assets/img/foto_kegiatan/';
-
                 $this->load->library('upload', $config);
 
                 if($this->upload->do_upload('foto')){
-
                     $old_image = $data['kegiatan']['foto'];
                     if($old_image != 'default.png'){
                         unlink(FCPATH. 'assets/img/foto-kegiatan/'. $old_image);
@@ -101,6 +94,7 @@ class Kegiatan extends CI_Controller
             $this->db->set('tanggal_kegiatan', $tanggal_kegiatan);
             $this->db->set('tanggal_daftar', $tanggal_daftar);
             $this->db->set('tanggal_berakhir', $tanggal_berakhir);
+            $this->db->set('link_pendaftaran', $link_pendaftaran);
             $this->db->where('id', $id);
             $this->db->update('kegiatan');
             redirect('kegiatan');
