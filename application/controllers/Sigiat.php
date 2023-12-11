@@ -31,7 +31,7 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);
         $this->load->view('sigiat/detail_kegiatan', $data);
-        $this->load->view('sigiat/footer');
+        $this->load->view('sigiat/footer', $data);
     }
 
     public function viewMore2($id)
@@ -43,6 +43,17 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);
         $this->load->view('sigiat/detail_kegiatan2', $data);
-        $this->load->view('sigiat/footer');
+        $this->load->view('sigiat/footer', $data);
+    }
+
+    public function tentangKami()
+    {
+        $data['title'] = 'Tentang Kami';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/tentang_kami', $data);
+        $this->load->view('sigiat/footer', $data);
     }
 }
