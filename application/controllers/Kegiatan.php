@@ -73,6 +73,7 @@ class Kegiatan extends CI_Controller
             $tanggal_berakhir = $this->input->post('tanggal_berakhir');
             $id = $this->input->post('id');
             $penyelenggara = $this->input->post('penyelenggara');
+            $link_pendaftaran = $this->input->post('link_pendaftaran');
 
 
 
@@ -103,6 +104,7 @@ class Kegiatan extends CI_Controller
             $this->db->set('tanggal_daftar', $tanggal_daftar);
             $this->db->set('tanggal_berakhir', $tanggal_berakhir);
             $this->db->set('penyelenggara', $penyelenggara);
+            $this->db->set('link_pendaftaran', $link_pendaftaran);
             $this->db->where('id', $id);
             $this->db->update('kegiatan');
             redirect('kegiatan');

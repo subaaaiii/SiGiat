@@ -7,11 +7,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Tentang Kami</a>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('Sigiat/tentangKami'); ?>">Tentang Kami</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url('sigiat/viewFavorite')?>">Favorite</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url('auth')?>">Admin</a>
         </li>
 
       </ul>

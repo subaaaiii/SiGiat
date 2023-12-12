@@ -98,6 +98,16 @@ class Sigiat extends CI_Controller
 
     echo $status; // 'add' if added to favorites, 'remove' if removed
 }
+public function tentangKami()
+    {
+        $data['title'] = 'Tentang Kami';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/tentang_kami', $data);
+        $this->load->view('sigiat/footer', $data);
+    }
 
 
 }

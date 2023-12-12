@@ -31,7 +31,8 @@ class Kegiatan_model extends CI_Model
             'tanggal_daftar' => $data['tanggal_daftar'],
             'tanggal_berakhir' => $data['tanggal_berakhir'],
             'penyelenggara' => $data['penyelenggara'],
-            'foto' => $data_foto
+            'foto' => $data_foto,
+            'link_pendaftaran' => $data['link_pendaftaran']
         );
         $this->db->insert('kegiatan', $data_insert);
         return $this->db->affected_rows();

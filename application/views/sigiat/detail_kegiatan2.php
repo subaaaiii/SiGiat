@@ -18,6 +18,8 @@
                     <p class="card-text"><strong>Tanggal Kegiatan:</strong> <?= date('d-m-Y', strtotime($kegiatan->tanggal_kegiatan)) ?></p>
                     <!-- Tampilkan informasi lainnya sesuai kebutuhan -->
                     <a class="btn btn-secondary" onclick="goBack()">Kembali</a>
+                    &nbsp;
+                    <a href="<?php echo $kegiatan->link_pendaftaran; ?>" target="_blank" class="btn btn-secondary" style="width: 20%;">Daftar</a>
                 </div>
                 <!-- Letakkan link "Lihat Deskripsi" di sini -->
             </div>
