@@ -19,7 +19,17 @@
                     <!-- Tampilkan informasi lainnya sesuai kebutuhan -->
                     <a class="btn btn-secondary" onclick="goBack()">Kembali</a>
                     &nbsp;
-                    <a href="<?php echo $kegiatan->link_pendaftaran; ?>" target="_blank" class="btn btn-secondary" style="width: 20%;">Daftar</a>
+                    <a <?php
+                    // Assuming $kegiatan->link_pendaftaran contains the user-input URL
+                    $userInputURL = $kegiatan->link_pendaftaran;
+
+                    // Check if the URL starts with "http://" or without any protocol
+                    if (!preg_match("~^(?:f|ht)tps?://~i", $userInputURL)) {
+                        // If not, prepend "https://"
+                        $userInputURL = "https://" . $userInputURL;
+                    }
+                    ?>
+                    <a href="<?php echo $userInputURL; ?>" target="_blank" class="btn btn-secondary" style="width: 20%;">Daftar</a>
                 </div>
                 <!-- Letakkan link "Lihat Deskripsi" di sini -->
             </div>
