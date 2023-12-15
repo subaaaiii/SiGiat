@@ -11,10 +11,16 @@
           <a class="nav-link" href="<?php echo base_url('Sigiat/tentangKami'); ?>">Tentang Kami</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url('sigiat/viewFavorite')?>">Favorite</a>
+
+          <?php if ($this->session->userdata('email')) : ?>
+            <a class="nav-link" href="<?= base_url('sigiat/viewFavorite') ?>">Favorite</a>
+          <?php else : ?>
+            <a class="nav-link" onclick="showLoginModal()">Favorite</a>
+          <?php endif; ?>
+
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url('auth')?>">Admin</a>
+          <a class="nav-link" href="<?= base_url('auth') ?>">Admin</a>
         </li>
 
       </ul>
@@ -39,7 +45,7 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="<?=base_url('user')?>">
+              <a class="dropdown-item" href="<?= base_url('user') ?>">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 My Profile
               </a>

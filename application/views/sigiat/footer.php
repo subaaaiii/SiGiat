@@ -1,5 +1,24 @@
 <!-- Footer -->
-<!-- Footer -->
+<!-- Add this modal HTML somewhere in your page -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                       </div>
+                       <div class="modal-body">
+                         <p>Silahkan untuk menambahkan ke favorite.</p>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
 <style>
     .text-reset {
         text-decoration: none;

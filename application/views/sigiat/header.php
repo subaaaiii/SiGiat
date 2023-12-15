@@ -22,7 +22,7 @@
   <link href="<?= base_url('assets/'); ?>vendor/aos/aos.css" rel="stylesheet">
   <link href="<?= base_url('assets/'); ?>vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-
+  <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
 </head>
 
 <body id="page-top">

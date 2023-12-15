@@ -25,6 +25,7 @@ class Sigiat extends CI_Controller
         $data['title'] = 'Sigiat';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
+        $data['filter'] = $this->Kegiatan_model->filter();
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);
         $this->load->view('sigiat/kegiatan', $data);

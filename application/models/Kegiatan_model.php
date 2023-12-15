@@ -8,7 +8,7 @@ class Kegiatan_model extends CI_Model
         $this->db->select('user.name, kegiatan.*');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'right');
-        return $this->db->get()->result();       
+        return $this->db->get()->result();
     }
 
     public function getKegiatanByUserId($user_id)
@@ -16,7 +16,7 @@ class Kegiatan_model extends CI_Model
         $this->db->select('user.name, kegiatan.*');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
-        $this->db->where('kegiatan.penyelenggara',$user_id );
+        $this->db->where('kegiatan.penyelenggara', $user_id);
         return $this->db->get()->result();
     }
 
@@ -43,7 +43,7 @@ class Kegiatan_model extends CI_Model
         $this->db->select('user.name, kegiatan.*');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
-        $this->db->where('kegiatan.id',$id );
+        $this->db->where('kegiatan.id', $id);
         return $this->db->get()->row();
     }
 
@@ -58,38 +58,38 @@ class Kegiatan_model extends CI_Model
     // }
     public function getFavorite($id)
     {
-    $this->db->select('user.id, user.name, kegiatan.*, favorite.id');
-    $this->db->from('user');
-    $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara','inner');
-    $this->db->join('favorite', 'kegiatan.id = favorite.id_kegiatan');
-    $this->db->where('favorite.id_user', $id);
-    return $this->db->get()->result();       
-       
+        $this->db->select('user.id, user.name, kegiatan.*, favorite.id');
+        $this->db->from('user');
+        $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
+        $this->db->join('favorite', 'kegiatan.id = favorite.id_kegiatan');
+        $this->db->where('favorite.id_user', $id);
+        return $this->db->get()->result();
     }
     public function removeFavorite($id)
     {
         $this->db->delete('favorite', array('id' => $id));
     }
-    public function isFavorite($kegiatanId,$user_id) {
+    public function isFavorite($kegiatanId, $user_id)
+    {
         // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
         $query = $this->db->get_where('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $user_id));
         return $query->num_rows() > 0;
     }
     public function toggleFavorite($kegiatanId, $userId)
-{
-    // Check if the entry exists in the favorites table
-    $isFavorite = $this->db->get_where('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId))->row();
+    {
+        // Check if the entry exists in the favorites table
+        $isFavorite = $this->db->get_where('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId))->row();
 
-    if ($isFavorite) {
-        // If it exists, remove it
-        $this->db->delete('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
-        return 'remove';
-    } else {
-        // If it doesn't exist, add it
-        $this->db->insert('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
-        return 'add';
+        if ($isFavorite) {
+            // If it exists, remove it
+            $this->db->delete('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
+            return 'remove';
+        } else {
+            // If it doesn't exist, add it
+            $this->db->insert('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
+            return 'add';
+        }
     }
-}
 
 
 
@@ -108,4 +108,8 @@ class Kegiatan_model extends CI_Model
     //     $this->db->update('kegiatan', $data_update);
 
     // }
+
+    public function filter(){
+        return $this->db->get('filter')->result();
+    }
 }
