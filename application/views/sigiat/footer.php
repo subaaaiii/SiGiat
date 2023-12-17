@@ -1,30 +1,30 @@
 <!-- Footer -->
 <!-- Add this modal HTML somewhere in your page -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-                   <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-                       <div class="modal-header">
-                         <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                           <span aria-hidden="true">&times;</span>
-                         </button>
-                       </div>
-                       <div class="modal-body">
-                         <p>Silahkan login untuk melakukan aksi ini.</p>
-                       </div>
-                       <div class="modal-footer">
-                         <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
-                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Silahkan login untuk melakukan aksi ini.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
     .text-reset {
         text-decoration: none;
     }
 </style>
-<footer class="sticky-footer bg-primary " style="margin-top: 120px";>
+<footer class="sticky-footer bg-primary " style="margin-top: 120px" ;>
     <!-- Section: Social media -->
     <!-- <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     </section> -->
@@ -122,7 +122,7 @@
 </div>
 
 <script>
-    document.getElementById('filterButton').addEventListener('click', function () {
+    document.getElementById('filterButton').addEventListener('click', function() {
         var selectedBulanValue = document.getElementById('bulanDropdown').value;
         var selectedBulanArray = selectedBulanValue.split('-');
         var selectedBulan = selectedBulanArray[0];
@@ -192,6 +192,60 @@
         // Redirect the user to the login page
         window.location.href = "<?= base_url('auth'); ?>";
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $('.toggle-daftar').on('click', function() {
+            var button = $(this);
+            var kegiatanId = button.data('kegiatan-id1');
+            var userId = button.data('user-id1');
+
+            $.ajax({
+                url: '<?= base_url("sigiat/toggleDaftar") ?>',
+                type: 'POST',
+                data: {
+                    kegiatanId: kegiatanId,
+                    userId: userId
+                },
+                success: function(response) {
+                    if (response == 'add') {
+                        button.removeClass('btn-border').addClass('btn-primary');
+                        button.html('<i class="fas fa-file-signature"></i> Terdaftar');
+                    } else {
+                        button.removeClass('btn-primary').addClass('btn-border');
+                        button.html('<i class="fas fa-file-signature"></i> Saya Sudah Daftar');
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.toggle-follow').on('click', function() {
+            var button = $(this);
+            var organisasiId = button.data('organisasi');
+            var userId = button.data('user-id2');
+
+            $.ajax({
+                url: '<?= base_url("sigiat/toggleFollow") ?>',
+                type: 'POST',
+                data: {
+                    organisasiId: organisasiId,
+                    userId: userId
+                },
+                success: function(response) {
+                    if (response == 'add') {
+                        button.removeClass('btn-border').addClass('btn-secondary');
+                        button.html('Followed');
+                    } else {
+                        button.removeClass('btn-secondary').addClass('btn-border');
+                        button.html('Follow');
+                    }
+                }
+            });
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {

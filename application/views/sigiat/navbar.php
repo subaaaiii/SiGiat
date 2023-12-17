@@ -20,6 +20,15 @@
 
         </li>
         <li class="nav-item">
+
+          <?php if ($this->session->userdata('email')) : ?>
+            <a class="nav-link" href="<?= base_url('sigiat/viewKegiatanku') ?>">Kegiatanku</a>
+          <?php else : ?>
+            <a style="cursor: pointer;" class="nav-link" onclick="showLoginModal()">Kegiatanku</a>
+          <?php endif; ?>
+
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= base_url('auth') ?>">Admin</a>
         </li>
 

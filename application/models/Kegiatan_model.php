@@ -36,6 +36,14 @@ class Kegiatan_model extends CI_Model
         $this->db->where('kegiatan.penyelenggara', $user_id);
         return $this->db->get()->result();
     }
+    public function countgetKegiatanByUserId($user_id)
+    {
+        $this->db->select('user.name, kegiatan.*');
+        $this->db->from('user');
+        $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
+        $this->db->where('kegiatan.penyelenggara', $user_id);
+        return $this->db->get()->num_rows();
+    }
 
     function insertKegiatan($data, $data_foto)
     {
@@ -82,10 +90,25 @@ class Kegiatan_model extends CI_Model
         $this->db->where('favorite.id_user', $id);
         return $this->db->get()->result();
     }
+    public function getKegiatanku($id)
+    {
+        $this->db->select('user.id as user_id, user.name, kegiatan.*, daftar.id');
+        $this->db->from('user');
+        $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
+        $this->db->join('daftar', 'kegiatan.id = daftar.id_kegiatan');
+        $this->db->where('daftar.id_user', $id);
+        return $this->db->get()->result();
+    }
     public function removeFavorite($id)
     {
         $this->db->delete('favorite', array('id' => $id));
     }
+
+    public function removeKegiatanku($id)
+    {
+        $this->db->delete('daftar', array('id' => $id));
+    }
+
     public function isFavorite($kegiatanId, $user_id)
     {
         // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
@@ -104,6 +127,48 @@ class Kegiatan_model extends CI_Model
         } else {
             // If it doesn't exist, add it
             $this->db->insert('favorite', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
+            return 'add';
+        }
+    }
+    public function isDaftar($kegiatanId, $user_id)
+    {
+        // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
+        $query = $this->db->get_where('daftar', array('id_kegiatan' => $kegiatanId, 'id_user' => $user_id));
+        return $query->num_rows() > 0;
+    }
+    public function toggleDaftar($kegiatanId, $userId)
+    {
+        // Check if the entry exists in the favorites table
+        $isDaftar = $this->db->get_where('daftar', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId))->row();
+
+        if ($isDaftar) {
+            // If it exists, remove it
+            $this->db->delete('daftar', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
+            return 'remove';
+        } else {
+            // If it doesn't exist, add it
+            $this->db->insert('daftar', array('id_kegiatan' => $kegiatanId, 'id_user' => $userId));
+            return 'add';
+        }
+    }
+    public function isPengikut($organisasiId, $user_id)
+    {
+        // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
+        $query = $this->db->get_where('hubungan', array('id_user' => $organisasiId, 'pengikut' => $user_id));
+        return $query->num_rows() > 0;
+    }
+    public function toggleFollow($organisasiId, $user_id)
+    {
+        // Check if the entry exists in the favorites table
+        $isPengikut = $this->db->get_where('hubungan', array('id_user' => $organisasiId, 'pengikut' => $user_id))->row();
+
+        if ($isPengikut) {
+            // If it exists, remove it
+            $this->db->delete('hubungan', array('id_user' => $organisasiId, 'pengikut' => $user_id));
+            return 'remove';
+        } else {
+            // If it doesn't exist, add it
+            $this->db->insert('hubungan', array('id_user' => $organisasiId, 'pengikut' => $user_id));
             return 'add';
         }
     }
@@ -132,5 +197,12 @@ class Kegiatan_model extends CI_Model
     public function getOrganisasi(){
         $this->db->where('user.lingkup IS NOT NULL');
         return $this->db->get('user')->result();
+    }
+
+    public function getFollower($user_id)
+    {
+        // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
+        $query = $this->db->get_where('hubungan', array('id_user' => $user_id));
+        return $query->num_rows();
     }
 }

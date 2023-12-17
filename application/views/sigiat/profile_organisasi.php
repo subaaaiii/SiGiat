@@ -13,26 +13,46 @@
                         <h5><?= $organisasi['name'] ?></h5>
                     </div>
                     <div class="mx-auto">
-                        <button type="button" class="btn btn-outline-dark mt-2" data-mdb-ripple-color="dark" style="width:120px">
-                            Edit Profile
-                        </button>
+                        <?php if ($user['id'] != $organisasi['id']) : ?>
+                            <?php if ($this->session->userdata('email')) : ?>
+                                <?php
+                                // Load the model at the beginning of your view file
+                                $this->load->model('Kegiatan_model');
+
+                                // Now you can use the model's methods in the view
+                                $isPengikut = $this->Kegiatan_model->isPengikut($organisasi['id'], $user['id']);
+                                $buttonColor = $isPengikut ? 'btn-secondary' : 'btn-border';
+                                ?>
+                                <button class="btn border toggle-follow <?= $buttonColor ?>" style="text-decoration: none" data-organisasi="<?= $organisasi['id'] ?>" data-user-id2="<?= $user['id'] ?>">
+                                    <?php echo $isPengikut ? 'Followed' : 'Follow'; ?>
+                                </button>
+                            <?php else : ?>
+                                <button class="btn border" style="text-decoration: none" onclick="showLoginModal()">
+                                    Follow
+                                </button>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <button type="button" class="btn btn-outline-dark mt-2" data-mdb-ripple-color="dark" style="width:120px">
+                                Edit Profile
+                            </button>
+                        <?php endif; ?>
+
                     </div>
                     <div class="p-4 text-black mt-3" style="background-color: #f8f9fa;">
                         <div class="d-flex justify-content-center text-center py-1">
                             <div>
-                                <p class="mb-1 h5">253</p>
+                                <p class="mb-1 h5"><?=$jumlahkegiatan ?></p>
                                 <p class="small text-muted mb-0">Kegiatan</p>
                             </div>
                             <div class="px-3">
-                                <p class="mb-1 h5">1026</p>
+                                <p class="mb-1 h5"><?=$follower?></p>
                                 <p class="small text-muted mb-0">Pengikut</p>
                             </div>
                         </div>
                     </div>
                     <div class="card-body p-4 text-black">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <p class="lead fw-normal mb-0">Kegiatan<strong> Terbaru</strong></p>
-                            <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+                            <p class="lead fw-normal mb-0">Kegiatan <strong><?=$organisasi['name']?></strong></p>
                         </div>
                         <?php
                         // Urutkan array berdasarkan ID secara menaik
@@ -42,17 +62,12 @@
 
                         // Balik urutan array
                         $kegiatan = array_reverse($kegiatan);
-                        $limit = 4;
-                        $count = 0;
                         ?>
                         <div class="row mb-4">
                             <?php foreach ($kegiatan as $k) :
-                                if ($count >= $limit) {
-                                    break;
-                                }
 
-                                // Tambahkan satu ke hitungan
-                                $count++; ?>
+                                
+                             ?>
                                 <div class="col-md-6 mt-4">
                                     <div class="card shadow">
                                         <div class="row">

@@ -136,7 +136,9 @@
                     <?php endif; ?>
                   </div>
 
-                  <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                  <a href="<?= base_url('sigiat/profile/') . $k->user_id ?>">
+                   <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                 </a>
                   <?php
 
                   // Ubah format tanggal ke objek DateTime
