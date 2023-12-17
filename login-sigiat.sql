@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 07:15 AM
+-- Generation Time: Dec 17, 2023 at 06:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.4.1
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `daftar`
+--
+
+CREATE TABLE `daftar` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `daftar`
+--
+
+INSERT INTO `daftar` (`id`, `id_user`, `id_kegiatan`) VALUES
+(32, 4, 1),
+(33, 4, 12),
+(34, 4, 13);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `favorite`
 --
 
@@ -38,9 +59,60 @@ CREATE TABLE `favorite` (
 --
 
 INSERT INTO `favorite` (`id`, `id_user`, `id_kegiatan`) VALUES
-(3, 4, 7),
 (12, 1, 8),
-(22, 4, 8);
+(28, 4, 10),
+(32, 4, 6),
+(33, 4, 7),
+(34, 4, 3),
+(35, 4, 14),
+(39, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `filter`
+--
+
+CREATE TABLE `filter` (
+  `id` int(11) NOT NULL,
+  `jenis_kegiatan` varchar(128) NOT NULL,
+  `icon` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `filter`
+--
+
+INSERT INTO `filter` (`id`, `jenis_kegiatan`, `icon`) VALUES
+(1, 'Festival', 'festival.png'),
+(2, 'Konser', 'konser.png'),
+(3, 'Lkmm', 'lkmm.png'),
+(4, 'Lomba', 'lomba.png'),
+(6, 'Oprec', 'oprec.png'),
+(7, 'Pameran', 'pameran.png'),
+(8, 'Seminar', 'seminar.png'),
+(9, 'Talkshow', 'talkshow.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hubungan`
+--
+
+CREATE TABLE `hubungan` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `pengikut` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hubungan`
+--
+
+INSERT INTO `hubungan` (`id`, `id_user`, `pengikut`) VALUES
+(1, 12, 1),
+(2, 12, 4),
+(4, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -67,9 +139,9 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id`, `judul`, `deskripsi`, `penyelenggara`, `jenis`, `tanggal_daftar`, `tanggal_berakhir`, `tanggal_kegiatan`, `foto`, `status`, `link_pendaftaran`) VALUES
-(1, 'EP FEST 2023', '📣 HIMPUNAN MAHASISWA ILMU EKONOMI STUDI PEMBANGUNAN UPN “VETERAN” JAWA TIMUR MEMPERSEMBAHKAN 📣\n\n🎡 EP FEST 2023 🎡\n\n________________________\n\n🎮 TURNAMEN MOBILE LEGENDS 🎮\n\n🏆 *TOTAL HADIAH JUTAAN RUPIAH + E-SERTIFIKAT* 🏆\n\n💸 HTM : Rp 65.000/tim\n\n🗓️ Jadwal\n• Technical Meeting : 6 Desember 2023\n📍Media : Zoom Meeting\n• Babak Penyisihan : 11 Desember 2023\n• Babak Semifinal dan Final : 13 Desember 2023\n📍Lokasi : Online\n\n‼️Pendaftaran : 17 November - 4 Desember 2023‼️\n\n🔗 Link Pendaftaran : https://bit.ly/PendaftaranMobileLegendsEPFest2023\n\n________________________\n\n💸 Pembayaran :\n• Shopeepay 085264639465 (a/n Cheryl)\n• BNI 1413675956 (a/n Ainun Nadifa Suwondo)\n• Dana 085895868658 (a/n Ainun Nadifa Suwondo)\n\n👤Informasi lebih lanjut :\n• Cheryl (085264639465)\n• Nadifa (085895868658)\n\n#MLEsports\n#LegendsofML\n#BattleofLegends\n#MobileLegendsContest\n#MobileLegendsTournament\n#MLGamingLeague\n#MLCompetition\n#EPFESTUPNVJT2023\n#UPNVETERANJAWATIMUR\n#HIMIESPAJAYA\n\nDepartemen Hubungan Masyarakat\n————————————————\n-HIMANIS 2023-\n“Kabinet Abhikara”\n#AdbiskuSatu\n#JayalahAdministrasi\n', 12, 'lomba', '2023-11-17', '2023-12-04', '2023-12-06', 'lomba-himanis.jpg', 0, 'https://bit.ly/PendaftaranMobileLegendsEPFest2023'),
-(2, 'ECOEDVENT 2023', '[ECOEDVENT 2023]\r\n\r\nHi, Peeps!🙌🏻\r\n\r\nDid you know? Your wait will coming. The amazing and awaited event, ECOEDVENT 2023. There will be a lot of activities in this event.😱🎪\r\n\r\n‼️SAVE THE DATE‼️\r\n🗓️: 5th Desember 2023\r\n📍: Giri Loka UPN “Veteran” Jawa Timur\r\n\r\n🌱“Achieving SDGs Through Sustainable Tourism”\r\nSpeaker 1: Dr. Ir. Ar. R. A. Retno Hastijanti, M.T., IPU., IAI\r\nSpeaker 2: Devina Helmalia Latiefah\r\n\r\n🎊Festival “Permainan Kesatuan Bangsa”\r\n• Performance Drama\r\n• Performance Traditional Dance and Song\r\n• Booth UMKM\r\n• Booth Traditional Games (playable)\r\n\r\nBenefits:\r\nE - Sertifikat\r\nDoorprize\r\nVoucher 25.000 by Merapi Mountain\r\nLearning Experience\r\n\r\nNote the date and stay tune!🤩\r\n\r\n———\r\n\r\n#ECOEDVENT2023\r\n#PARIWISATAUPNVJT\r\n\r\nDepartemen Hubungan Masyarakat\r\n————————————————\r\n-HIMANIS 2023-\r\n“Kabinet Abhikara”\r\n#AdbiskuSatu\r\n#JayalahAdministrasiDepartemen Hubungan Masyarakat\r\n', 18, 'seminar', '2023-12-05', '2023-12-05', '2023-12-05', 'ecoedvent2023.jpg', 0, ''),
-(3, 'DIES NATALIS HIMIESPA KE-28', '🎉 HIMPUNAN MAHASISWA ILMU EKONOMI STUDI PEMBANGUNAN UPN \"VETERAN\" JAWA TIMUR MEMPERSEMBAHKAN 🎉\r\n\r\n🎊 DIES NATALIS HIMIESPA KE-28 🎊\r\n\r\n_________________________\r\n\r\n🗓 Sabtu, 16 Desember 2023\r\n\r\n📍Lokasi\r\nParkiran Belakang FEB 1 UPN \"Veteran\" Jawa Timur\r\n\r\n👥 Keluarga Mahasiswa Ekonomi Pembangunan dan Mahasiswa UPN \"Veteran\" Jawa Timur\r\n\r\n🎤 Penampilan Angkatan Ekonomi Pembangunan (2020-2023) 🎤\r\n\r\n✨ Penampilan Spesial dari :\r\n🪩 DJ ANDREANZ\r\n🎤 Ukm Musik \"Satya Palapa\"🎤\r\n\r\n💸 HTM khusus KM EP: Rp30.000\r\n💸 HTM KM UPNVJT: Rp35.000\r\n\r\n‼️Pembelian Tiket : 30 November - 15 Desember 2023‼️\r\n\r\n🔗 Link Pembelian Tiket : https://bit.ly/PendaftaranDiesnatalisEPFest2023\r\n\r\n_________________________\r\n\r\n💸 Pembayaran :\r\n• Shopeepay 085264639465 (a/n Cheryl)\r\n• BNI 1413675956 (a/n Ainun Nadifa Suwondo)\r\n• Dana 085895868658 (a/n Ainun Nadifa Suwondo)\r\n\r\n👤Informasi lebih lanjut :\r\n• intagram @official_epfest\r\n• Cheryl (085264639465)\r\n• Nadifa (085895868658)\r\n\r\n*TIKET TERBATAS*\r\n\r\n📌 NB : *Penukaran tiket dilakukan pada tanggal 15 Desember 2023.*\r\n\r\n#EPFESTUPNVJT2023\r\n#UPNVETERANJAWATIMUR\r\n#HIMIESPAJAYA\r\n#KABINETRINASCITA\r\n', 12, 'konser musik', '2023-11-30', '2023-12-15', '2023-12-16', 'disnat-ekonomi-pembangunan.jpg', 0, ''),
+(1, 'EP FEST 2023', '📣 HIMPUNAN MAHASISWA ILMU EKONOMI STUDI PEMBANGUNAN UPN “VETERAN” JAWA TIMUR MEMPERSEMBAHKAN 📣\n\n🎡 EP FEST 2023 🎡\n\n________________________\n\n🎮 TURNAMEN MOBILE LEGENDS 🎮\n\n🏆 *TOTAL HADIAH JUTAAN RUPIAH + E-SERTIFIKAT* 🏆\n\n💸 HTM : Rp 65.000/tim\n\n🗓️ Jadwal\n• Technical Meeting : 6 Desember 2023\n📍Media : Zoom Meeting\n• Babak Penyisihan : 11 Desember 2023\n• Babak Semifinal dan Final : 13 Desember 2023\n📍Lokasi : Online\n\n‼️Pendaftaran : 17 November - 4 Desember 2023‼️\n\n🔗 Link Pendaftaran : https://bit.ly/PendaftaranMobileLegendsEPFest2023\n\n________________________\n\n💸 Pembayaran :\n• Shopeepay 085264639465 (a/n Cheryl)\n• BNI 1413675956 (a/n Ainun Nadifa Suwondo)\n• Dana 085895868658 (a/n Ainun Nadifa Suwondo)\n\n👤Informasi lebih lanjut :\n• Cheryl (085264639465)\n• Nadifa (085895868658)\n\n#MLEsports\n#LegendsofML\n#BattleofLegends\n#MobileLegendsContest\n#MobileLegendsTournament\n#MLGamingLeague\n#MLCompetition\n#EPFESTUPNVJT2023\n#UPNVETERANJAWATIMUR\n#HIMIESPAJAYA\n\nDepartemen Hubungan Masyarakat\n————————————————\n-HIMANIS 2023-\n“Kabinet Abhikara”\n#AdbiskuSatu\n#JayalahAdministrasi\n', 12, 'lomba', '2023-11-16', '2023-12-31', '2024-01-01', 'lomba-himanis.jpg', 0, 'https://bit.ly/PendaftaranMobileLegendsEPFest2023'),
+(2, 'ECOEDVENT 2023', '[ECOEDVENT 2023]\r\n\r\nHi, Peeps!🙌🏻\r\n\r\nDid you know? Your wait will coming. The amazing and awaited event, ECOEDVENT 2023. There will be a lot of activities in this event.😱🎪\r\n\r\n‼️SAVE THE DATE‼️\r\n🗓️: 5th Desember 2023\r\n📍: Giri Loka UPN “Veteran” Jawa Timur\r\n\r\n🌱“Achieving SDGs Through Sustainable Tourism”\r\nSpeaker 1: Dr. Ir. Ar. R. A. Retno Hastijanti, M.T., IPU., IAI\r\nSpeaker 2: Devina Helmalia Latiefah\r\n\r\n🎊Festival “Permainan Kesatuan Bangsa”\r\n• Performance Drama\r\n• Performance Traditional Dance and Song\r\n• Booth UMKM\r\n• Booth Traditional Games (playable)\r\n\r\nBenefits:\r\nE - Sertifikat\r\nDoorprize\r\nVoucher 25.000 by Merapi Mountain\r\nLearning Experience\r\n\r\nNote the date and stay tune!🤩\r\n\r\n———\r\n\r\n#ECOEDVENT2023\r\n#PARIWISATAUPNVJT\r\n\r\nDepartemen Hubungan Masyarakat\r\n————————————————\r\n-HIMANIS 2023-\r\n“Kabinet Abhikara”\r\n#AdbiskuSatu\r\n#JayalahAdministrasiDepartemen Hubungan Masyarakat\r\n', 18, 'seminar', '2023-12-05', '2023-12-05', '2023-11-05', 'ecoedvent2023.jpg', 0, ''),
+(3, 'DIES NATALIS HIMIESPA KE-28', '🎉 HIMPUNAN MAHASISWA ILMU EKONOMI STUDI PEMBANGUNAN UPN \"VETERAN\" JAWA TIMUR MEMPERSEMBAHKAN 🎉\r\n\r\n🎊 DIES NATALIS HIMIESPA KE-28 🎊\r\n\r\n_________________________\r\n\r\n🗓 Sabtu, 16 Desember 2023\r\n\r\n📍Lokasi\r\nParkiran Belakang FEB 1 UPN \"Veteran\" Jawa Timur\r\n\r\n👥 Keluarga Mahasiswa Ekonomi Pembangunan dan Mahasiswa UPN \"Veteran\" Jawa Timur\r\n\r\n🎤 Penampilan Angkatan Ekonomi Pembangunan (2020-2023) 🎤\r\n\r\n✨ Penampilan Spesial dari :\r\n🪩 DJ ANDREANZ\r\n🎤 Ukm Musik \"Satya Palapa\"🎤\r\n\r\n💸 HTM khusus KM EP: Rp30.000\r\n💸 HTM KM UPNVJT: Rp35.000\r\n\r\n‼️Pembelian Tiket : 30 November - 15 Desember 2023‼️\r\n\r\n🔗 Link Pembelian Tiket : https://bit.ly/PendaftaranDiesnatalisEPFest2023\r\n\r\n_________________________\r\n\r\n💸 Pembayaran :\r\n• Shopeepay 085264639465 (a/n Cheryl)\r\n• BNI 1413675956 (a/n Ainun Nadifa Suwondo)\r\n• Dana 085895868658 (a/n Ainun Nadifa Suwondo)\r\n\r\n👤Informasi lebih lanjut :\r\n• intagram @official_epfest\r\n• Cheryl (085264639465)\r\n• Nadifa (085895868658)\r\n\r\n*TIKET TERBATAS*\r\n\r\n📌 NB : *Penukaran tiket dilakukan pada tanggal 15 Desember 2023.*\r\n\r\n#EPFESTUPNVJT2023\r\n#UPNVETERANJAWATIMUR\r\n#HIMIESPAJAYA\r\n#KABINETRINASCITA\r\n', 12, 'konser', '2023-11-30', '2023-12-15', '2023-12-16', 'disnat-ekonomi-pembangunan.jpg', 0, ''),
 (4, 'Achieve Career Excellent (ACE) 2023', '\"Siapkan dirimu untuk meraih keunggulan karier di Achieve Career Excellent (ACE) 2023! 🌟✨ Temukan rahasia sukses dalam \'Unlocking Career Excellence: Ace Insights in CV Crafting and LinkedIn Mastery\'.\r\n\r\nJangan lewatkan kesempatan untuk:\r\n\r\n🌐 Meningkatkan CV dengan format ATS Friendly\r\n🔗 Maksimalkan LinkedIn sebagai senjata utama mencari peluang karir\r\n👔 Kesempatan peluang magang\r\n🎓 Peroleh wawasan berharga tentang dunia kerja\r\n🎁 Dapatkan e-certificate eksklusif\r\n\r\n📅 Tanggal: 8 Desember 2023\r\n🕒 Waktu: 13.00 WIB (Open Gate) hingga selesai\r\n📍 Lokasi: Ruang Seminar Giri Santika II, Fakultas Ilmu Komputer, UPN Veteran Jawa Timur\r\n\r\n‼Partisipasi terbatas! Daftar sekarang sebelum kehabisan slot! 🏃♂\r\n\r\nUntuk pendaftaran, klik link\r\nhttps://himatifa.link/regace\r\n\r\nInfo lebih lanjut, hubungi kami:\r\n📞 Atha : http://wa.me/6285259451304\r\n📞 Anjas: http://wa.me/62881026805965\r\n\r\n🚀 Jangan lewatkan kesempatan menakjubkan ini untuk membuka pintu menuju karier yang gemilang! 🌐🎉\r\n\r\n#AchieveCareerExcellent\r\n#JayaJayaLuarbiasa\r\n#KabinetSatyaRacana\r\n#HIMATIFA\r\n', 14, 'seminar', '2023-12-01', '2023-12-08', '2023-12-08', 'achieve-career-excellent.jpg', 0, ''),
 (5, 'KASTRA FASILKOM : Reaktualisasi Gen-Z dalam Meminimalisir Penyimpangan pada Proses Pemilu', '[KASTRA FASILKOM : Reaktualisasi Gen-Z dalam Meminimalisir Penyimpangan pada Proses Pemilu]\r\n\r\n🇮🇩 BEM Fasilkom UPN “Veteran” Jawa Timur, Proudly Present : KASTRA FASILKOM 2023 🇮🇩\r\n\r\nMenjelang PEMILU yang akan dilaksanakan pada tahun 2024 saat ini, ada banyak sekali penyimpangan-penyimpangan yang terjadi. Tak sedikit penyimpangan tersebut melibatkan para Generasi-Z. Oleh karena itu dibutuhkan reaktualisasi para Generasi-Z tersebut dalam meminimalisir penyimpangan yang ada.\r\n\r\nBadan Eksekutif Mahasisa Fakultas Ilmu Komputer UPN “Veteran” Jawa Timur, menyelenggarakan acara KASTRA FASILKOM untuk mengkaji penyimpangan yang ada pada proses Pemilu terutama dikalangan Generasi-Z.\r\n\r\nThe event will be held on:\r\n📆: Rabu, 6 Desember 2023\r\n🕐: 08.00 WIB\r\n📍: Ruang Seminar Lantai 3 FIK 2, UPN “Veteran” Jawa Timur\r\n\r\n🗣️ Speaker 1: Syafiudin\r\n(Koordinator Divisi Pencegahan, Partisipasi Masyarakat, dan Hubungan Masyarakat Bawaslu)\r\n🗣️ Speaker 2: Singgih Manggalou S.IP., M.IP\r\n(Dosen Asisten Ahli FISIP UPN V Jawa Timur)\r\n🗣️ Moderator: Ahmad Alfian Ertiansyah\r\n(Mahasiswa Fasilkom UPN V Jawa Timur)\r\n\r\nBenefits :\r\n📧 E-Certificate\r\n✨ Knowledge and Experience\r\n🏅 SKPM Point (Only For UPN “Veteran” East Java Students)\r\n\r\n‼️ Pendaftaran TIDAK DIPUNGUT BIAYA serta Terbuka untuk UMUM ‼️\r\n\r\nAren’t you guys excited ⁉️ Go register yourself now!!!\r\n\r\n⬇️ Register Link ⬇️\r\nbit.ly/KASTRAFASILKOMv\r\n\r\n⬇️Guidebook Link⬇️\r\nhttps://drive.google.com/file/d/1kNp-ya4pE3gyYbrl3MvX4NM2x5WoAs_h/view?usp=sharing\r\n\r\n📲Contact Person :\r\n• Sharleen (+6281226248084)\r\n• Yasita (‪+6285655789522‬)\r\n\r\n#KASTRAFASILKOM2023\r\n#BEMFASILKOMUPNVJATIM\r\n#SATUFASILKOMKITAKUAT\r\n', 9, 'seminar', '2023-11-29', '2023-12-06', '2023-12-06', 'kastra.jpg', 0, ''),
 (6, 'KOPI 3rd', 'Halo halo halo KM-TP❗❗\r\nSebagai pembawa informasi, kami dari departemen Kominfo hadir dengan \"KOPI\" yang akan terbit di bulan Desember ini lohhh!\r\n\r\nMaka dari itu kami membuka formulir pengumpulan karya berupa puisi yang nantinya akan kami publikasikan di instagram @himatepaupn dan penempelan karya terbaik pada mading✨\r\n\r\nTema: Hari Bela Negara\r\n\"Semangat Bela Negara, Junjung Tinggi Nilai Kemanusiaan\"\r\n\r\nTimeline:\r\n2-17 Desember 2023: Pengumpulan karya\r\n19 Desember 2023: Penerbitan KOPI di ig himatepa\r\n[ HARI BELA NEGARA ]\r\n\r\nBerikut link gformnya:\r\nhttps://bit.ly/SubmitKaryaKOPI2023\r\n\r\nMenarik bukan?? Ayo tunggu apa lagi? Jangan khawatir, ada hadiah buat karya terbaik kok🤩\r\n\r\nDitunggu yaa karya dari kalian!!! Have a nice day🙌🏼\r\n\r\n#himatepa\r\n#himatepa2023\r\n#himatepajaya\r\n#kabinetkarsacipta\r\n#rasakankarsaciptakankarya\r\n', 15, 'lomba', '2023-12-02', '2023-12-17', '2023-12-19', 'kopi3rd.jpg', 0, ''),
@@ -120,7 +192,8 @@ INSERT INTO `user` (`id`, `name`, `lingkup`, `email`, `image`, `password`, `role
 (17, 'HMTI', 3, 'HMTI@gmail.com', 'HMTI.png', '$2y$10$xTEoB9rN9gM4.4PRchKttecU4.3640oU4YulX7QVL824qAlr5G3aC', 3, 1, 1701750752),
 (18, 'HIMASATA', 3, 'HIMASATA@gmail.com', 'HIMASATA.jpeg', '$2y$10$mqDHBLsqMXo7AvPEpI0XPO8hdTj10tVS85a5XJzYlEmQ92UZz9yHK', 3, 1, 1701750837),
 (19, 'hilmi', NULL, 'hilmi@gmail.com', 'Subai4.jpg', '$2y$10$5OS3kRQKoP81/R9365l0b.kATrIzShyQWiYhBPqe9JX8r9LZ0Ysma', 2, 1, 1701757874),
-(20, 'Himasifo', 3, 'himasifo@gmail.com', 'default.jpg', '$2y$10$c1q.RShs3xBTM2pNIYZLLe0/s9VlcivA0vUus4OvKDlUw//DUVcDu', 3, 1, 1701757941);
+(20, 'Himasifo', 3, 'himasifo@gmail.com', 'default.jpg', '$2y$10$c1q.RShs3xBTM2pNIYZLLe0/s9VlcivA0vUus4OvKDlUw//DUVcDu', 3, 1, 1701757941),
+(21, 'fasilkom', 3, 'fasilkom@gmail.com', 'default.jpg', '$2y$10$ROIradcE3/SjGeN8KN1Pn.ek5KNS2sPv6B3NV0S6A3sXP/gUJMYYu', 3, 1, 1702531063);
 
 -- --------------------------------------------------------
 
@@ -229,12 +302,34 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 --
 
 --
+-- Indexes for table `daftar`
+--
+ALTER TABLE `daftar`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `daftar_kegiatan` (`id_kegiatan`),
+  ADD KEY `daftar_user` (`id_user`);
+
+--
 -- Indexes for table `favorite`
 --
 ALTER TABLE `favorite`
   ADD PRIMARY KEY (`id`),
   ADD KEY `favorite_kegiatan` (`id_kegiatan`),
   ADD KEY `favorite_user` (`id_user`);
+
+--
+-- Indexes for table `filter`
+--
+ALTER TABLE `filter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hubungan`
+--
+ALTER TABLE `hubungan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `pengikut` (`pengikut`);
 
 --
 -- Indexes for table `kegiatan`
@@ -278,22 +373,40 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT for table `daftar`
+--
+ALTER TABLE `daftar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `favorite`
 --
 ALTER TABLE `favorite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `filter`
+--
+ALTER TABLE `filter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `hubungan`
+--
+ALTER TABLE `hubungan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -324,11 +437,25 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- Constraints for table `daftar`
+--
+ALTER TABLE `daftar`
+  ADD CONSTRAINT `daftar_kegiatan` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `daftar_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `favorite`
 --
 ALTER TABLE `favorite`
   ADD CONSTRAINT `favorite_kegiatan` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorite_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hubungan`
+--
+ALTER TABLE `hubungan`
+  ADD CONSTRAINT `hubungan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hubungan_ibfk_2` FOREIGN KEY (`pengikut`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kegiatan`
