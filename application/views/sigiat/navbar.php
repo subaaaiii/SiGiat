@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light light" style="height: 80px; z-index: 1000">
+<nav class="navbar navbar-expand-lg navbar-light light">
   <div class="container">
     <a class="navbar-brand" href="<?= base_url() ?>">SiGiat</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,8 +6,8 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item ">
           <a class="nav-link" href="<?php echo base_url('Sigiat/tentangKami'); ?>">Tentang Kami</a>
         </li>
         <li class="nav-item">
@@ -15,7 +15,7 @@
           <?php if ($this->session->userdata('email')) : ?>
             <a class="nav-link" href="<?= base_url('sigiat/viewFavorite') ?>">Favorite</a>
           <?php else : ?>
-            <a class="nav-link" onclick="showLoginModal()">Favorite</a>
+            <a style="cursor: pointer;" class="nav-link" onclick="showLoginModal()">Favorite</a>
           <?php endif; ?>
 
         </li>
@@ -24,7 +24,7 @@
         </li>
 
       </ul>
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav">
         <?php
         if (!$this->session->userdata('email')) {
         ?>

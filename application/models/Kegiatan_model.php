@@ -5,9 +5,26 @@ class Kegiatan_model extends CI_Model
 {
     public function getKegiatan()
     {
+        $this->db->select('user.name,user.id as user_id, kegiatan.*');
+        $this->db->from('user');
+        $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'right');
+        return $this->db->get()->result();
+    }
+    public function filterKegiatan($filter)
+    {
         $this->db->select('user.name, kegiatan.*');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'right');
+        $this->db->where('kegiatan.jenis',$filter);
+        return $this->db->get()->result();
+    }
+    public function filterByBulan($bulan,$tahun)
+    {
+        $this->db->select('user.name, kegiatan.*');
+        $this->db->from('user');
+        $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'right');
+        $this->db->where('MONTH(kegiatan.tanggal_kegiatan)',$bulan);
+        $this->db->where('YEAR(kegiatan.tanggal_kegiatan)',$tahun);
         return $this->db->get()->result();
     }
 
@@ -58,7 +75,7 @@ class Kegiatan_model extends CI_Model
     // }
     public function getFavorite($id)
     {
-        $this->db->select('user.id, user.name, kegiatan.*, favorite.id');
+        $this->db->select('user.id as user_id, user.name, kegiatan.*, favorite.id');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
         $this->db->join('favorite', 'kegiatan.id = favorite.id_kegiatan');
@@ -111,5 +128,9 @@ class Kegiatan_model extends CI_Model
 
     public function filter(){
         return $this->db->get('filter')->result();
+    }
+    public function getOrganisasi(){
+        $this->db->where('user.lingkup IS NOT NULL');
+        return $this->db->get('user')->result();
     }
 }

@@ -26,31 +26,35 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <div class="float-right">
-                                        <a href="<?= base_url("sigiat/removeFromFavorite/{$k->id}") ?>">
-                                            <button class="btn border" style="text-decoration: none">
-                                                <i class="fas fa-trash"></i> 
-                                            </button>
-                                        </a>
+                                    <a href="<?= base_url("sigiat/removeFromFavorite/{$k->id}") ?>">
+                                        <button class="btn border" style="text-decoration: none">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </a>
                                 </div>
-                                <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                                <a href="<?= base_url("sigiat/profile/{$k->user_id}")  ?>">
+                                    <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                                </a>
                                 <?php
 
-                                // Ubah format tanggal ke objek DateTime
                                 $tanggalBerakhir = new DateTime($k->tanggal_berakhir);
 
-                                // Tanggal hari ini
+                                // // Tanggal hari ini
                                 $hariIni = new DateTime();
 
-                                // Hitung selisih hari
-                                $selisih = $hariIni->diff($tanggalBerakhir);
-                                $selisihHari = $selisih->format('%a'); // Format '%R%a' memberikan hasil dengan tanda plus atau minus
+                                // Jika hari ini sebelum tanggal berakhir
+                                if ($hariIni < $tanggalBerakhir) {
+                                    $selisih = $hariIni->diff($tanggalBerakhir);
+                                    $selisihHari = $selisih->format('%a');
 
-                                // Tampilkan pesan sesuai kondisi
-                                if ($selisihHari > 0) {
-                                    echo "<p class='card-text'>Registrasi : $selisihHari hari lagi</p>";
-                                } elseif ($selisihHari == 0) {
-                                    echo "<p class='card-text'>Hari ini terakhir registrasi</p>";
-                                } else {
+                                    if ($selisihHari > 0) {
+                                        echo "<p class='card-text'>Registrasi: $selisihHari hari lagi</p>";
+                                    } elseif ($selisihHari == 0) {
+                                        echo "<p class='card-text'>Hari ini terakhir registrasi</p>";
+                                    }
+                                }
+                                // Jika hari ini sama atau setelah tanggal berakhir
+                                else {
                                     echo "<p class='card-text'>Registrasi telah ditutup</p>";
                                 }
                                 ?>

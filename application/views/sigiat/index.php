@@ -52,23 +52,44 @@
      <div class="col">
        <h2>Kegiatan <strong>Terbaru</strong></h2>
      </div>
-     <div class="col">
+     <!-- <div class="col">
        <button class="btn btn-primary float-right"><a href="<?= base_url('sigiat/viewAll') ?>" style="text-decoration : none; color:white;">Lihat Semua Kegiatan</a></button>
-     </div>
+     </div> -->
    </div>
+   <!-- Card logic -->
    <?php
-    // Urutkan array berdasarkan ID secara menaik
-    usort($kegiatan, function ($a, $b) {
-      return $a->id - $b->id;
+    // Separate events with open and closed registration
+    $openRegistrationEvents = [];
+    $closedRegistrationEvents = [];
+
+    foreach ($kegiatan as $k) {
+      $tanggalBerakhir = new DateTime($k->tanggal_berakhir);
+      $hariIni = new DateTime();
+
+      if ($hariIni < $tanggalBerakhir) {
+        $openRegistrationEvents[] = $k;
+      } else {
+        $closedRegistrationEvents[] = $k;
+      }
+    }
+
+    // Sort both arrays based on ID in ascending order
+    usort($openRegistrationEvents, function ($a, $b) {
+      return $b->id - $a->id;
     });
 
-    // Balik urutan array
-    $kegiatan = array_reverse($kegiatan);
+    usort($closedRegistrationEvents, function ($a, $b) {
+      return $b->id - $a->id;
+    });
+
+    // Combine arrays (open registration events first)
+    $combinedEvents = array_merge($openRegistrationEvents, $closedRegistrationEvents);
+
     $limit = 4;
     $count = 0;
     ?>
    <div class="row mb-4">
-     <?php foreach ($kegiatan as $k) :
+     <?php foreach ($combinedEvents as $k) :
         if ($count >= $limit) {
           break;
         }
@@ -85,17 +106,17 @@
                <div class="card-body">
                  <div class="float-right">
                    <?php if ($this->session->userdata('email')) : ?>
-                    <?php
-                    // Load the model at the beginning of your view file
-                    $this->load->model('Kegiatan_model');
+                     <?php
+                      // Load the model at the beginning of your view file
+                      $this->load->model('Kegiatan_model');
 
-                    // Now you can use the model's methods in the view
-                    $isFavorite = $this->Kegiatan_model->isFavorite($k->id,$user['id']);
-                    $buttonColor = $isFavorite ? 'btn-warning' : 'btn-border';
-                    ?>
-                       <button class="btn border toggle-favorite <?= $buttonColor ?>" style="text-decoration: none" data-kegiatan-id="<?= $k->id ?>" data-user-id="<?= $user['id'] ?>">
-                         <i class="fas fa-star"></i> Favorite
-                       </button>
+                      // Now you can use the model's methods in the view
+                      $isFavorite = $this->Kegiatan_model->isFavorite($k->id, $user['id']);
+                      $buttonColor = $isFavorite ? 'btn-warning' : 'btn-border';
+                      ?>
+                     <button class="btn border toggle-favorite <?= $buttonColor ?>" style="text-decoration: none" data-kegiatan-id="<?= $k->id ?>" data-user-id="<?= $user['id'] ?>">
+                       <i class="fas fa-star"></i> Favorite
+                     </button>
                    <?php else : ?>
                      <button class="btn border" style="text-decoration: none" onclick="showLoginModal()">
                        <i class="fas fa-star"></i> Favorite
@@ -103,25 +124,29 @@
                    <?php endif; ?>
                  </div>
 
-                 <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                 <a href="<?= base_url('sigiat/profile/') . $k->user_id ?>">
+                   <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
+                 </a>
                  <?php
 
-                  // Ubah format tanggal ke objek DateTime
                   $tanggalBerakhir = new DateTime($k->tanggal_berakhir);
 
-                  // Tanggal hari ini
+                  // // Tanggal hari ini
                   $hariIni = new DateTime();
 
-                  // Hitung selisih hari
-                  $selisih = $hariIni->diff($tanggalBerakhir);
-                  $selisihHari = $selisih->format('%a');
+                  // Jika hari ini sebelum tanggal berakhir
+                  if ($hariIni < $tanggalBerakhir) {
+                    $selisih = $hariIni->diff($tanggalBerakhir);
+                    $selisihHari = $selisih->format('%a');
 
-                  // Tampilkan pesan sesuai kondisi
-                  if ($selisihHari > 0) {
-                    echo "<p class='card-text'>Registrasi : $selisihHari hari lagi</p>";
-                  } elseif ($selisihHari == 0) {
-                    echo "<p class='card-text'>Hari ini terakhir registrasi</p>";
-                  } else {
+                    if ($selisihHari > 0) {
+                      echo "<p class='card-text'>Registrasi: $selisihHari hari lagi</p>";
+                    } elseif ($selisihHari == 0) {
+                      echo "<p class='card-text'>Hari ini terakhir registrasi</p>";
+                    }
+                  }
+                  // Jika hari ini sama atau setelah tanggal berakhir
+                  else {
                     echo "<p class='card-text'>Registrasi telah ditutup</p>";
                   }
                   ?>
@@ -135,5 +160,9 @@
        </div>
      <?php endforeach ?>
    </div>
+   <!-- end Card Logic -->
+   <center>
+     <h5><a href="<?= base_url('sigiat/kegiatan') ?>">Tampilkan Semua Kegiatan ></a></h5>
+   </center>
  </div>
  </body>

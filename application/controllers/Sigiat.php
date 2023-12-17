@@ -20,11 +20,20 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/footer', $data);
         
     }
-    public function kegiatan()
+    public function kegiatan($filter=NULL)
     {
         $data['title'] = 'Sigiat';
+        $data['organisasi'] = $this->Kegiatan_model->getOrganisasi();
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
+        if($filter){
+            $data['kegiatan'] = $this->Kegiatan_model->filterKegiatan($filter);
+            $data['isFilter'] = true;
+            $data['titleFilter'] = $filter;
+        }else{
+            $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
+            $data['isFilter'] = false;
+            $data['titleFilter'] = 'Semua Kegiatan';
+        }
         $data['filter'] = $this->Kegiatan_model->filter();
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);
@@ -32,6 +41,31 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/footer', $data);
         
     }
+    public function filterBulanTahun($nilai,$bulan,$tahun)
+    {
+        $data['title'] = 'Sigiat';
+        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kegiatan'] = $this->Kegiatan_model->filterByBulan($nilai,$tahun);
+        $data['filter'] = $this->Kegiatan_model->filter();
+        $data['titleFilter'] = $bulan.' ' .$tahun;
+        $data['isFilter'] = TRUE;
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/kegiatan', $data);
+        $this->load->view('sigiat/footer', $data);
+        
+    }
+    public function filterOrganisasi()
+    {
+        $data['title'] = 'Sigiat';
+        $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('sigiat/header', $data);
+        $this->load->view('sigiat/navbar', $data);
+        $this->load->view('sigiat/kegiatan', $data);
+        $this->load->view('sigiat/footer', $data);
+        
+    }
+
     public function viewMore($id)
     {
         $data['title'] = 'Detail Kegiatan';
@@ -55,14 +89,15 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/detail_kegiatan2', $data);
         $this->load->view('sigiat/footer');
     }
-    public function viewAll()
+    public function profile($user_id)
     {
         $data['title'] = 'Semua Kegiatan';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['kegiatan'] = $this->Kegiatan_model->getKegiatan();
+        $data['organisasi'] = $this->db->get_Where('user', ['id' => $user_id])->row_array();
+        $data['kegiatan'] = $this->Kegiatan_model->getKegiatanByUserId($user_id);
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);
-        $this->load->view('sigiat/semua_kegiatan', $data);
+        $this->load->view('sigiat/profile_organisasi', $data);
         $this->load->view('sigiat/footer', $data);
         
     }
@@ -110,5 +145,6 @@ public function tentangKami()
         $this->load->view('sigiat/footer', $data);
     }
 
+    
 
 }

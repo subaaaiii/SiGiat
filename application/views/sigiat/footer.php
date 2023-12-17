@@ -10,7 +10,7 @@
                          </button>
                        </div>
                        <div class="modal-body">
-                         <p>Silahkan untuk menambahkan ke favorite.</p>
+                         <p>Silahkan login untuk melakukan aksi ini.</p>
                        </div>
                        <div class="modal-footer">
                          <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
@@ -24,7 +24,7 @@
         text-decoration: none;
     }
 </style>
-<footer class="sticky-footer bg-primary mt-5">
+<footer class="sticky-footer bg-primary " style="margin-top: 120px";>
     <!-- Section: Social media -->
     <!-- <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     </section> -->
@@ -120,6 +120,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('filterButton').addEventListener('click', function () {
+        var selectedBulanValue = document.getElementById('bulanDropdown').value;
+        var selectedBulanArray = selectedBulanValue.split('-');
+        var selectedBulan = selectedBulanArray[0];
+        var selectedTahun = document.getElementById('tahunDropdown').value;
+
+        // Set default values after filtering
+        document.getElementById('bulanDropdown').value = selectedBulanValue ? selectedBulanValue : "";
+        document.getElementById('tahunDropdown').value = selectedTahun ? selectedTahun : "";
+
+        // Perform any action you want with selectedBulan, selectedTahun, and selectedBulanValue
+        console.log('Selected Bulan Value:', selectedBulanValue);
+        console.log('Selected Bulan:', selectedBulan);
+        console.log('Selected Tahun:', selectedTahun);
+
+        // Redirect or pass values to the controller as needed
+        var redirectUrl = "<?= base_url("sigiat/filterBulanTahun") ?>/" + selectedBulan + "/" + selectedBulanArray[1] + "/" + selectedTahun;
+        window.location.href = redirectUrl;
+    });
+</script>
 <script>
     function previewFile() {
         var preview = document.getElementById('previewImage');
@@ -222,6 +244,7 @@
         });
     });
 </script>
+
 
 </body>
 
