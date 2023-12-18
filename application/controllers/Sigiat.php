@@ -21,7 +21,7 @@ class Sigiat extends CI_Controller
     }
     public function kegiatan($filter = NULL)
     {
-        $data['title'] = 'Sigiat';
+        $data['title'] = 'Kegiatan';
         $data['organisasi'] = $this->Kegiatan_model->getOrganisasi();
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($filter) {
@@ -41,7 +41,7 @@ class Sigiat extends CI_Controller
     }
     public function filterBulanTahun($nilai, $bulan, $tahun)
     {
-        $data['title'] = 'Sigiat';
+        $data['title'] = 'Kegiatan';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kegiatan'] = $this->Kegiatan_model->filterByBulan($nilai, $tahun);
         $data['filter'] = $this->Kegiatan_model->filter();
@@ -54,7 +54,7 @@ class Sigiat extends CI_Controller
     }
     public function filterOrganisasi()
     {
-        $data['title'] = 'Sigiat';
+        $data['title'] = 'Kegiatan';
         $data['user'] = $this->db->get_Where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->view('sigiat/header', $data);
         $this->load->view('sigiat/navbar', $data);

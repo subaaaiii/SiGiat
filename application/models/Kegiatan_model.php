@@ -92,7 +92,7 @@ class Kegiatan_model extends CI_Model
     }
     public function getKegiatanku($id)
     {
-        $this->db->select('user.id as user_id, user.name, kegiatan.*, daftar.id');
+        $this->db->select('user.id as user_id, user.name, kegiatan.id as kegiatan_id, kegiatan.*, daftar.id');
         $this->db->from('user');
         $this->db->join('kegiatan', 'user.id = kegiatan.penyelenggara', 'inner');
         $this->db->join('daftar', 'kegiatan.id = daftar.id_kegiatan');
@@ -173,24 +173,6 @@ class Kegiatan_model extends CI_Model
         }
     }
 
-
-
-    // function update_kegiatan($data)
-    // {
-
-    //     $data_update = array(
-    //         'judul' => $data['judul'],
-    //         'deskripsi' => $data['deskripsi'],
-    //         'tanggal_kegiatan' => $data['tanggal_kegiatan'],
-    //         'tanggal_daftar' => $data['tanggal_daftar'], 
-    //         'tanggal_berakhir' => $data['tanggal_berakhir'],
-    //     );
-
-    //     $this->db->where('id', $data['id']);
-    //     $this->db->update('kegiatan', $data_update);
-
-    // }
-
     public function filter(){
         return $this->db->get('filter')->result();
     }
@@ -204,5 +186,14 @@ class Kegiatan_model extends CI_Model
         // Adjust 'kegiatan' and 'id_kegiatan' based on your actual table and column names
         $query = $this->db->get_where('hubungan', array('id_user' => $user_id));
         return $query->num_rows();
+    }
+
+    public function getKegiatanTerdaftar($user_id)
+    {
+        $this->db->select('daftar.id_user,daftar.id_kegiatan, kegiatan.*');
+        $this->db->from('daftar');
+        $this->db->join('kegiatan', 'daftar.id_kegiatan = kegiatan.id', 'inner');
+        $this->db->where('daftar.id_user', $user_id);
+        return $this->db->get()->result();
     }
 }

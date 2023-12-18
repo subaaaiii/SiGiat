@@ -124,7 +124,7 @@
                    <?php endif; ?>
                  </div>
 
-                 <a href="<?= base_url('sigiat/profile/') . $k->user_id ?>">
+                 <a href="<?= base_url('sigiat/profile/') . $k->penyelenggara ?>">
                    <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
                  </a>
                  <?php

@@ -48,7 +48,7 @@
                         $userInputURL = "https://" . $userInputURL;
                     }
                     ?>
-                    <a href="<?php echo $userInputURL; ?>" target="_blank" class="btn btn-secondary" style="width: 20%;">Daftar</a>&nbsp;
+                    <a href="<?php echo $userInputURL; ?>" target="_blank" class="btn btn-primary" style="width: 20%;">Daftar</a>&nbsp;
                     <?php if ($this->session->userdata('email')) : ?>
                         <?php
                         // Load the model at the beginning of your view file

@@ -32,7 +32,7 @@
                                         </button>
                                     </a>
                                 </div>
-                                <a href="<?= base_url("sigiat/profile/{$k->user_id}")  ?>">
+                                <a href="<?= base_url("sigiat/profile/{$k->id}")  ?>">
                                     <p class="card-text limited-text" style="color: #2e59d9;"><b><?= $k->name ?></b></p>
                                 </a>
                                 <?php
@@ -60,7 +60,7 @@
                                 ?>
                                 <h5 class="card-title limited-text"><b><?= $k->judul ?></b></h5>
                                 <p class="card-text limited-text"><?= $k->deskripsi ?></p>
-                                <a href="<?= base_url("sigiat/viewMore/{$k->id}") ?>">Lihat Selengkapnya...</a>
+                                <a href="<?= base_url("sigiat/viewMore/{$k->kegiatan_id}") ?>">Lihat Selengkapnya...</a>
                             </div>
                         </div>
                     </div>

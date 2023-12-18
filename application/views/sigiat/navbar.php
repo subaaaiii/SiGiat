@@ -7,6 +7,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto">
+
         <li class="nav-item ">
           <a class="nav-link" href="<?php echo base_url('Sigiat/tentangKami'); ?>">Tentang Kami</a>
         </li>
@@ -31,7 +32,93 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('auth') ?>">Admin</a>
         </li>
+        <li class="nav-item dropdown no-arrow mx-1">
+          <?php if ($this->session->userdata('email')) : ?>
+            <?php
+            // Load the model at the beginning of your view file
+            $this->load->model('Kegiatan_model');
+            $terdaftar = $this->Kegiatan_model->getKegiatanTerdaftar($user['id']);
+            $hariIni = new DateTime();
+            $notif = 0;
+            ?>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+              <h6 class="dropdown-header">
+                Notifikasi
+              </h6>
 
+              <?php
+              foreach ($terdaftar as $t) : ?>
+                <?php
+                $tanggalKegiatan = new DateTime($t->tanggal_kegiatan);
+                $selisih = $hariIni->diff($tanggalKegiatan);
+                $selisihHari = $selisih->format('%r%a');
+                if ($selisihHari == 1 && $selisihHari > 0) {
+                  echo
+                  '<a class="dropdown-item d-flex align-items-center" href="' . base_url('/sigiat/viewMore/' . $t->id_kegiatan) . '">
+                <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="small text-gray-500">' . $hariIni->format('d F Y') . '</div>
+                    <span class="font-weight-bold">Anda memiliki Esok Hari, Klik untuk melihat!</span>
+                  </div>
+                </a>';
+                  $notif++;
+                } else if ($selisihHari == 0) {
+                  echo
+                  '<a class="dropdown-item d-flex align-items-center" href="' . base_url('sigiat/viewMore/' . $t->id_kegiatan) . '">
+            <div class="mr-3">
+                <div class="icon-circle bg-primary">
+                  <i class="fas fa-file-alt text-white"></i>
+                </div>
+              </div>
+              
+              <div>
+                <div class="small text-gray-500">' . $hariIni->format('d F Y') . '</div>
+                <span class="font-weight-bold">Anda memiliki Kegiatan Hari Ini, Klik untuk melihat!</span>
+              </div>
+            </a>';
+                  $notif++;
+                }
+                ?>
+              <?php endforeach ?>
+              <?php if ($notif == 0) {
+                echo
+                '<div class="dropdown-item d-flex align-items-center">
+            <div class="mr-3">
+                <div class="icon-circle bg-success">
+                  <i class="fas fa-check-double text-white"></i>
+                </div>
+              </div>
+              
+              <div>
+                <div class="small text-gray-500">' . $hariIni->format('d F Y') . '</div>
+                <span class="font-weight-bold">Anda Tidak Memiliki Kegiatan diwaktu dekat!</span>
+              </div>
+            </div>';
+              } ?>
+              <div class="dropdown-item text-center small text-gray-500" >Copyright &copy; SiGiat</div>
+            </div>
+
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bell fa-fw"></i>
+              <!-- Counter - Alerts -->
+              <?php if ($notif > 0) { ?>
+                <span class="badge badge-danger badge-counter"><?= $notif ?></span>
+              <?php } ?>
+            </a>
+          <?php else : ?>
+            <a style="cursor: pointer;" class="nav-link" onclick="showLoginModal()">
+              <i class="fas fa-bell fa-fw"></i>
+            </a>
+          <?php endif; ?>
+
+
+        </li>
       </ul>
       <ul class="navbar-nav">
         <?php
