@@ -40,7 +40,7 @@
             </div>
             <div class="form-group row">
                 <label for="deskripsi"><b>Deskripsi </b></label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" placeholder="Masukkan deskripsi" value="<?= $k->deskripsi ?>"></textarea>
+                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" placeholder="Masukkan deskripsi" ><?= $k->deskripsi ?></textarea>
                 <!-- Anda dapat menambahkan atribut rows untuk menentukan jumlah baris awal -->
             </div>
             <div class="form-group row">

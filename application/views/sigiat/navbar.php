@@ -64,7 +64,7 @@
                   
                   <div>
                     <div class="small text-gray-500">' . $hariIni->format('d F Y') . '</div>
-                    <span class="font-weight-bold">Anda memiliki Esok Hari, Klik untuk melihat!</span>
+                    <span class="font-weight-bold">Anda memiliki kegiatan Esok Hari, Klik untuk melihat!</span>
                   </div>
                 </a>';
                   $notif++;

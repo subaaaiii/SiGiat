@@ -72,15 +72,6 @@ class Kegiatan_model extends CI_Model
         return $this->db->get()->row();
     }
 
-    // function insertFavorite($id_kegiatan,$id_user)
-    // {
-    //     $data_insert = array(
-    //         'id_user' => $id_user,
-    //         'id_kegiatan' => $id_kegiatan
-    //     );
-    //     $this->db->insert('favorite', $data_insert);
-    //     return $this->db->affected_rows();
-    // }
     public function getFavorite($id)
     {
         $this->db->select('user.id as user_id, user.name, kegiatan.*, favorite.id');

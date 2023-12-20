@@ -52,9 +52,6 @@
      <div class="col">
        <h2>Kegiatan <strong>Terbaru</strong></h2>
      </div>
-     <!-- <div class="col">
-       <button class="btn btn-primary float-right"><a href="<?= base_url('sigiat/viewAll') ?>" style="text-decoration : none; color:white;">Lihat Semua Kegiatan</a></button>
-     </div> -->
    </div>
    <!-- Card logic -->
    <?php

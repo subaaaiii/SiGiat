@@ -98,11 +98,6 @@ class Sigiat extends CI_Controller
         $this->load->view('sigiat/profile_organisasi', $data);
         $this->load->view('sigiat/footer', $data);
     }
-    // public function insertToFavorite($id,$id_user)
-    // {
-    //     $this->Kegiatan_model->insertFavorite($id,$id_user);
-    //     redirect($this->agent->referrer());
-    // }
     public function removeFromFavorite($id)
     {
         $this->Kegiatan_model->removeFavorite($id);
